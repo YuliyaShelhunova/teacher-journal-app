@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ExportService } from "./../../common/services/export/export.service";
-// import { saveAs } from "file-saver";
+import * as fileSaver from 'file-saver';
 
 enum EExportTypes {
     pdfType = "pdf",
@@ -34,7 +34,7 @@ export class ExportComponent {
             }
         }
         this.exportService.getFile(typeFile, fileName).subscribe((response) => {
-            // saveAs(response, fileName);
+            fileSaver.saveAs(response, fileName);
         })
     }
 }
