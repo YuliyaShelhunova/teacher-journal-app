@@ -1,0 +1,12 @@
+<h3 class="title-style">{{'listOfSubjects' | translate}}</h3>
+
+<div class="background-style">
+    <div class="btn-group" *ngFor="let subject of subjects">
+        <button class="subject-button" data-toggle="modal" data-target="#myModal"
+            routerLink="/subjects/{{subject.id}}/records">{{subject.name}}</button>
+    </div>
+</div>
+<div style="display: grid;">
+    <button class="add-button" data-toggle="modal" data-target="#myModal" title="Add new subject"
+        (click)="openModal()"><img src="../../../assets/images/add-button.png" width="100px"></button>
+</div>

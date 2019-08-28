@@ -1,0 +1,15 @@
+<table>
+    <tr>
+        <td>
+            <table class="table table-bordered table-dark table-statistics-table">
+                <tr *ngFor="let subject of subjects">
+                    <td><a routerLink="/statistics/subjects/{{subject.id}}"
+                            routerLinkActive="active">{{subject.name}}</a></td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <router-outlet></router-outlet>
+        </td>
+    </tr>
+</table>

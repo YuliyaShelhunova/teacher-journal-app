@@ -1,0 +1,28 @@
+{
+    "subjects": [
+        {
+            "id": 111,
+            "name": "Physics",
+            "teacher": "M.Ivanova",
+            "cabinet": 315
+        },
+        {
+            "id": 112,
+            "name": "Chemistry",
+            "teacher": "V.Petrova",
+            "cabinet": 317
+        },
+        {
+            "id": 113,
+            "name": "Biology",
+            "teacher": "G.Sidorova",
+            "cabinet": 319
+        },
+        {
+            "id": 114,
+            "name": "Literature",
+            "teacher": "L.Pavlova",
+            "cabinet": 321
+        }
+    ]
+}

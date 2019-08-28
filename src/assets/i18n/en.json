@@ -1,0 +1,26 @@
+{
+    "appName" : "Teacher Journal",
+    "students": "Students",
+    "subjects": "Subjects",
+    "statistics": "Statistics",
+    "export": "Export",
+    "id": "Id",
+    "firstName":"First Name",
+    "lastName": "Last Name",
+    "address": "Address",
+    "description": "Description",
+    "add": "Add",
+    "listOfSubjects" : "List of subjects",
+    "nameSubject": "Name subject",
+    "teacher": "Teacher",
+    "cabinet": "Cabinet",
+    "addNewSubject": "Add new subject",
+    "addNewStudent": "Add new student",
+    "fieldIsRequired": "Field is required!",
+    "averageMark": "Average Mark",
+    "save": "Save",
+    "rating": "Rating",
+    "error": "ERROR!",
+    "pageNotFound": "Page wasn't found!"
+
+}

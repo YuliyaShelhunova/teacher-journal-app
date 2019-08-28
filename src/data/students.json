@@ -1,0 +1,52 @@
+{
+    "students": [
+        {
+            "id": 1,
+            "firstName": "Mark",
+            "lastName": "Otto",
+            "address": "st. Zukova"
+        },
+        {
+            "id": 2,
+            "firstName": "Alex",
+            "lastName": "Rick",
+            "address": "st. Zukova"
+        },
+        {
+            "id": 3,
+            "firstName": "Vova",
+            "lastName": "Shel",
+            "address": "st. Zukova"
+        },
+        {
+            "id": 4,
+            "firstName": "Yuliya",
+            "lastName": "Shel",
+            "address": "st. Zukova"
+        },
+        {
+            "id": 5,
+            "firstName": "Kit",
+            "lastName": "Tomas",
+            "address": "st. Zukova"
+        },
+        {
+            "id": 6,
+            "firstName": "Joy",
+            "lastName": "Roy",
+            "address": "st. Zukova"
+        },
+        {
+            "id": 7,
+            "firstName": "Ron",
+            "lastName": "Smit",
+            "address": "st. Zukova"
+        },
+        {
+            "id": 8,
+            "firstName": "Garry",
+            "lastName": "Smit",
+            "address": "st. Zukova"
+        }
+    ]
+}

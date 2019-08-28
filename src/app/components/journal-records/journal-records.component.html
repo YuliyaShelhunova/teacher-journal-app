@@ -1,0 +1,37 @@
+<h2 class="name-subject"> </h2>
+
+<div id="loading" *ngIf="loading">
+    <mat-spinner id="loading-image" [mode]="'indeterminate'" [color]="accent"></mat-spinner>
+</div>
+
+<span class="table-style">
+    <table class="table table-bordered table-dark" id="journal">
+        <thead class="thead-style">
+            <tr>
+                <th scope="col">{{'firstName' | translate}}</th>
+                <th scope="col">{{'lastName' | translate}}</th>
+                <th scope="col">{{'averageMark' | translate}}</th>
+                <th *ngFor="let date of dates; let i = index"><input type="string" [(ngModel)]="date"
+                        (ngModelChange)="updateDate(date, i)" style="width: 60px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let record of records">
+                <td>{{record.firstName}}</td>
+                <td>{{record.lastName}}</td>
+                <td>{{record.averageMark}}</td>
+                <td *ngFor="let rec of record.markOnDate | keyvalue">
+                    <input type="number" min="0" max="10" (change)="updateAverage(record, rec)" [(ngModel)]="rec.value"
+                        class="input-value">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</span>
+<button><img src="../../assets/images/addColumn.png" width="30px" (click)="addColumn()"></button>
+<div>
+    <h4 class="teacher-input">{{'teacher' | translate}}</h4>
+    <input type="string" name="teacherName" [(ngModel)]="teacher" #teacherName="ngModel" required />
+    <button [disabled]="teacherName.invalid || records.invalid" class="btn btn-default button-save"
+        (click)="saveTable(teacher)">{{'save' | translate }}</button>
+</div>

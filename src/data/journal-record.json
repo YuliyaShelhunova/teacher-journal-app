@@ -1,0 +1,272 @@
+[
+  {
+    "studentId": 1,
+    "subjectId": 111,
+    "averageMark": 5.6,
+    "markOnDate": [
+      {
+        "date": "05/03",
+        "mark": 9
+      },
+      {
+        "date": "06/03",
+        "mark": 3
+      },
+      {
+        "date": "07/03",
+        "mark": 7
+      },
+      {
+        "date": "10/03",
+        "mark": 6
+      },
+      {
+        "date": "11/03",
+        "mark": 3
+      }
+    ]
+  },
+  {
+    "studentId": 2,
+    "subjectId": 111,
+    "averageMark": 7.4,
+    "markOnDate": [
+      {
+        "date": "05/03",
+        "mark": 8
+      },
+      {
+        "date": "06/03",
+        "mark": 8
+      },
+      {
+        "date": "07/03",
+        "mark": 8
+      },
+      {
+        "date": "10/03",
+        "mark": 5
+      },
+      {
+        "date": "11/03",
+        "mark": 8
+      }
+    ]
+  },
+  {
+    "studentId": 3,
+    "subjectId": 111,
+    "averageMark": 4.0,
+    "markOnDate": [
+      {
+        "date": "05/03",
+        "mark": 3
+      },
+      {
+        "date": "06/03",
+        "mark": 3
+      },
+      {
+        "date": "07/03",
+        "mark": 4
+      },
+      {
+        "date": "10/03",
+        "mark": 6
+      },
+      {
+        "date": "11/03",
+        "mark": 4
+      }
+    ]
+  },
+  {
+    "studentId": 4,
+    "subjectId": 112,
+    "averageMark": 5.2,
+    "markOnDate": [
+      {
+        "date": "05/03",
+        "mark": 7
+      },
+      {
+        "date": "06/03",
+        "mark": 8
+      },
+      {
+        "date": "07/03",
+        "mark": 4
+      },
+      {
+        "date": "10/03",
+        "mark": 3
+      },
+      {
+        "date": "11/03",
+        "mark": 4
+      }
+    ]
+  },
+  {
+    "studentId": 5,
+    "subjectId": 112,
+    "averageMark": 6.0,
+    "markOnDate": [
+      {
+        "date": "05/03",
+        "mark": 5
+      },
+      {
+        "date": "06/03",
+        "mark": 8
+      },
+      {
+        "date": "07/03",
+        "mark": 7
+      },
+      {
+        "date": "10/03",
+        "mark": 6
+      },
+      {
+        "date": "11/03",
+        "mark": 4
+      }
+    ]
+  },
+  {
+    "studentId": 2,
+    "subjectId": 113,
+    "averageMark": 7.8,
+    "markOnDate": [
+      {
+        "date": "05/03",
+        "mark": 10
+      },
+      {
+        "date": "06/03",
+        "mark": 8
+      },
+      {
+        "date": "07/03",
+        "mark": 7
+      },
+      {
+        "date": "10/03",
+        "mark": 10
+      },
+      {
+        "date": "11/03",
+        "mark": 4
+      }
+    ]
+  },
+  {
+    "studentId": 4,
+    "subjectId": 113,
+    "averageMark": 9.0,
+    "markOnDate": [
+      {
+        "date": "05/03",
+        "mark": 10
+      },
+      {
+        "date": "06/03",
+        "mark": 9
+      },
+      {
+        "date": "07/03",
+        "mark": 8
+      },
+      {
+        "date": "10/03",
+        "mark": 10
+      },
+      {
+        "date": "11/03",
+        "mark": 8
+      }
+    ]
+  },
+  {
+    "studentId": 5,
+    "subjectId": 114,
+    "averageMark": 6.0,
+    "markOnDate": [
+      {
+        "date": "05/03",
+        "mark": 7
+      },
+      {
+        "date": "05/03",
+        "mark": 6
+      },
+      {
+        "date": "07/03",
+        "mark": 5
+      },
+      {
+        "date": "10/03",
+        "mark": 6
+      },
+      {
+        "date": "11/03",
+        "mark": 6
+      }
+    ]
+  },
+  {
+    "studentId": 7,
+    "subjectId": 114,
+    "averageMark": 5.0,
+    "markOnDate": [
+      {
+        "date": "05/03",
+        "mark": 6
+      },
+      {
+        "date": "06/03",
+        "mark": 4
+      },
+      {
+        "date": "07/03",
+        "mark": 6
+      },
+      {
+        "date": "10/03",
+        "mark": 5
+      },
+      {
+        "date": "11/03",
+        "mark": 4
+      }
+    ]
+  },
+  {
+    "studentId": 3,
+    "subjectId": 114,
+    "averageMark": 6.6,
+    "markOnDate": [
+      {
+        "date": "05/03",
+        "mark": 10
+      },
+      {
+        "date": "06/03",
+        "mark": 8
+      },
+      {
+        "date": "07/03",
+        "mark": 8
+      },
+      {
+        "date": "10/03",
+        "mark": 6
+      },
+      {
+        "date": "11/03",
+        "mark": 4
+      }
+    ]
+  }
+]

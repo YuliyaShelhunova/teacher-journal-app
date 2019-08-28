@@ -1,0 +1,29 @@
+<div class="background-form">
+    <h2>{{'addNewSubject' | translate}} </h2>
+    <div class="form-group">
+        <label>* {{'nameSubject' | translate}}</label>
+        <input type="string" class="form-control" name="subjectName" [(ngModel)]="name" #subjectName="ngModel"
+            required />
+        <div [hidden]="subjectName.valid || subjectName.untouched" class="alert alert-danger">
+            {{'fieldIsRequired' | translate}}
+        </div>
+    </div>
+    <div class="form-group">
+        <label>* {{'teacher' | translate}}</label>
+        <input type="string" class="form-control" name="teacherName" [(ngModel)]="teacher" #teacherName="ngModel"
+            required />
+        <div [hidden]="teacherName.valid || teacherName.untouched" class="alert alert-danger">
+           {{'fieldIsRequired' | translate}}
+        </div>
+    </div>
+    <div class="form-group">
+        <label>{{'cabinet' | translate}}</label>
+        <input type="number" class="form-control" name="cabinet" [(ngModel)]="cabinet" />
+    </div>
+    <div class="form-group">
+        <label>{{'description' | translate}}</label>
+        <textarea type="string" class="form-control" name="description" [(ngModel)]="description"></textarea>
+    </div>
+    <button [disabled]="subjectName.invalid || teacherName.invalid" class="btn btn-default add-button"
+        (click)="addSubject(name,teacher,cabinet,description)">{{'add' | translate}}</button>
+</div>

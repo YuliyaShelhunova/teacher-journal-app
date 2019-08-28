@@ -1,0 +1,26 @@
+<h2 class="title-style">{{'students' | translate}}</h2>
+<div>
+    <table class="table table-bordered table-dark">
+        <thead class="thead-background">
+            <tr>
+                <th scope="col">{{'id' | translate}}</th>
+                <th scope="col">{{'firstName' | translate}}</th>
+                <th scope="col">{{'lastName' | translate}}</th>
+                <th scope="col">{{'address' | translate}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students">
+                <th scope="row">{{student.id}}</th>
+                <td>{{student.firstName}}</td>
+                <td>{{student.lastName}}</td>
+                <td>{{student.address}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="add-button">
+    <button class="adding" data-toggle="modal" data-target="#myModal" title="Add new student" (click)="openModal()"><img
+            src="../../../assets/images/add-button.png" width="100px"></button>
+</div>

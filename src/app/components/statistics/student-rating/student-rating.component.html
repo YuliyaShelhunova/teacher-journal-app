@@ -1,0 +1,10 @@
+<div class="title-style">
+    <h3>{{nameStudent}}</h3>
+
+    <div *ngIf="statistics">
+        <span *ngFor="let i of statistics" class="fa fa-star checked" style="font-size: 48px;"></span>
+    </div>
+
+    <h4>{{'rating' | translate}}</h4>
+
+</div>
