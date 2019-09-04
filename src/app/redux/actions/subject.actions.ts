@@ -7,7 +7,11 @@ export enum ESubjectActions {
     AddSubject = "ADD_SUBJECT",
     AddSubjectSuccess = "ADD_SUBJECT_SUCCESS",
     GetStatisticsSubject = "GET_STATISTICS_SUBJECT",
-    GetStatisticsSubjectSuccess = "GET_STATISTICS_SUBJECT_SUCCESS"
+    GetStatisticsSubjectSuccess = "GET_STATISTICS_SUBJECT_SUCCESS",
+    UpdateSubject = "UPDATE_SUBJECT",
+    UpdateSubjectSuccess = "UPDATE_SUBJECT_SUCCESS",
+    GetSubject = "GET_SUBJECT",
+    GetSubjectSuccess = "GET_SUBJECT_SUCCESS",
 
 }
 export class GetSubjects implements Action {
@@ -39,5 +43,26 @@ export class GetStatisticsSubjectSuccess implements Action {
     constructor(public payload: any) { }
 }
 
-export type SubjectAction = GetSubjects | GetSubjectsSuccess | AddSubject | AddSubjectSuccess | GetStatisticsSubject | GetStatisticsSubjectSuccess
+export class UpdateSubject implements Action {
+    public readonly type = ESubjectActions.UpdateSubject;
+    constructor(public subjectId: number, public name: string) { }
+}
+
+export class UpdateSubjectSuccess implements Action {
+    public readonly type = ESubjectActions.UpdateSubjectSuccess;
+    constructor(public payload: string) { }
+}
+export class GetSubject implements Action {
+    public readonly type = ESubjectActions.GetSubject;
+    constructor(public subjectId: number) { }
+}
+
+export class GetSubjectSuccess implements Action {
+    public readonly type = ESubjectActions.GetSubjectSuccess;
+    constructor(public payload: Subject) { }
+}
+
+export type SubjectAction = GetSubjects | GetSubjectsSuccess | AddSubject | AddSubjectSuccess
+    | GetStatisticsSubject | GetStatisticsSubjectSuccess | UpdateSubject | UpdateSubjectSuccess
+    | GetSubject | GetSubjectSuccess
 

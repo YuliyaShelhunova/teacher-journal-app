@@ -3,7 +3,8 @@ import { Effect, ofType, Actions } from "@ngrx/effects";
 import { switchMap, map } from "rxjs/operators";
 import {
     GetSubjects, GetSubjectsSuccess, AddSubject, AddSubjectSuccess,
-    GetStatisticsSubject, GetStatisticsSubjectSuccess, ESubjectActions
+    GetStatisticsSubject, GetStatisticsSubjectSuccess, ESubjectActions,
+    UpdateSubject, UpdateSubjectSuccess, GetSubject, GetSubjectSuccess
 } from "../actions/subject.actions";
 import { SubjectService } from "./../../common/services/subject/subject.service";
 import { Subject } from "../../common/entities/subject";
@@ -28,6 +29,28 @@ export class SubjectsEffects {
     );
 
     @Effect()
+    public updateSubject$ = this._actions.pipe(
+        ofType<UpdateSubject>(ESubjectActions.UpdateSubject),
+        switchMap((action) => this._subjectService.updateSubjectById(action.subjectId, action.name).pipe(
+            map((data: Subject) => {
+                if (data["id"]) {
+                    return new UpdateSubjectSuccess(action.name);
+                }
+            })
+        ))
+    );
+
+    @Effect()
+    public getSubject$ = this._actions.pipe(
+        ofType<GetSubject>(ESubjectActions.GetSubject),
+        switchMap((action) => this._subjectService.getSubjectById(action.subjectId).pipe(
+            map((data: Subject) => {
+                return new GetSubjectSuccess(data);
+            })
+        ))
+    );
+
+    @Effect()
     public getStatisticsSubject$ = this._actions.pipe(
         ofType<GetStatisticsSubject>(ESubjectActions.GetStatisticsSubject),
         switchMap((action) => this._subjectService.getStatisticsSubject(action.payload).pipe(
@@ -36,6 +59,5 @@ export class SubjectsEffects {
             })))
     );
 
-    // tslint:disable-next-line:no-parameter-properties
     constructor(private _subjectService: SubjectService, private _actions: Actions) { }
 }

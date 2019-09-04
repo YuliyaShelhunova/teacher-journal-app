@@ -185,62 +185,57 @@ app.post('/api/subjects', function (req, res) {
     })
 });
 
+app.get('/api/subjects/:id', function (req, res) {
+    subjectsRepo.getById(req.params.id).then((data) => {
+        res.send(data)
+    }).catch((err) => {
+        console.log('There was an error querying subjects', JSON.stringify(err))
+        return res.send(err)
+    });
+})
+
 app.get('/api/subjects/:id/records', function (req, res) {
-    async.parallel({
-        records: function (callback) {
-            recordsRepo.getRecordsById(req.params.id).then((data) => {
-                data.map(element => {
-                    element.markOnDate = JSON.parse(element.markOnDate)
-                });
-                callback(null, data);
-            })
-        },
-        info: function (callback) {
-            subjectsRepo.getById(req.params.id).then((data) => {
-                callback(null, data);
-            });
-        }
-    }, function (err, results) {
-        console.log("RESULTS: " + results)
-        res.send(results);
-    }
-    );
+    recordsRepo.getRecordsById(req.params.id).then((data) => {
+        data.map(element => {
+            element.markOnDate = JSON.parse(element.markOnDate)
+        });
+        console.log("RECORDS: " + data);
+        res.send(data);
+    }).catch((err) => {
+        console.log('There was an error querying records', JSON.stringify(err))
+        return res.send(err)
+    });
 });
+
+app.post('/api/subjects/:id', function (req, res) {
+    var teacher = req.body.teacherName;
+    var subjectId = req.params.id;
+    subjectsRepo.getById(subjectId).then((data) => {
+        console.log("TEACHER: " + JSON.stringify(teacher) + "==" + data.teacher);
+        data.teacher = teacher;
+        subjectsRepo.update(data).then((data) => {
+            res.send(data)
+        }).catch((err) => {
+            console.log('There was an error querying subjects', JSON.stringify(err))
+            return res.send(err)
+        });
+    })
+})
 
 app.post('/api/subjects/:id/updateRecords', function (req, res) {
     console.log("UPDATE" + JSON.stringify(req.body));
-    var records = req.body.records;
-    var teacher = req.body.teacher;
-    var subjectId = req.params.id;
+    var records = req.body;
 
-    var promises = [];
-
-    if (teacher) {
-        promises.push(subjectsRepo.getById(subjectId).then((data) => {
-            // console.log("TEACHER: " + data.teacher + "---" + teacher);
-            data.teacher = teacher;
-            return subjectsRepo.update(data).then((data) => {
-                //console.log("Teacher: !!!" + JSON.data);
-                return data;
-            })
-        }));
-    }
-
-    if (records) {
-        records.map((record) => {
-            const { averageMark, markOnDate, studentId, subjectId } = record
-            //console.log("DATA" + averageMark + " " + JSON.stringify(markOnDate) + " " + studentId + " " + subjectId);
-            promises.push(recordsRepo.update(averageMark, JSON.stringify(markOnDate), studentId, subjectId).then((data) => {
-                console.log("DATA: !!!" + data);
-                return data
-            }).catch((err) => {
-                console.log('Server was not sent data', err)
-                return err
-            }));
-        })
-    }
-
-    Promise.all(promises).then((data) => {
+    Promise.all(records.map((record) => {
+        const { averageMark, markOnDate, studentId, subjectId } = record
+        return recordsRepo.update(averageMark, JSON.stringify(markOnDate), studentId, subjectId).then((data) => {
+            console.log("DATA: !!!" + data);
+            return data
+        }).catch((err) => {
+            console.log('Server was not sent data', err)
+            return err
+        });
+    })).then((data) => {
         if (data) {
             console.log(data);
             res.send(data);

@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { JournalRecord, Record } from "../../common/entities/journal-record";
 import { Store } from "@ngrx/store";
 import * as RecordAction from "../../redux/actions/record.actions";
+import * as SubjectAction from "../../redux/actions/subject.actions";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -27,16 +28,23 @@ export class JournalRecordsComponent implements OnInit {
     public ngOnInit() {
         if (this.id) {
             this.store.dispatch(new RecordAction.GetRecords(this.id));
-            this.store.select("records").subscribe(data => {
-                console.log("Subject Table -> getRecordsById" + data);
-                if (data.records && this.id == data.info.id) {
-                    this.dates = [];
-                    this.records = this.mapData(data.records, this);
-                    this.teacher = { name: data.info.teacher, isChanged: false };
-                    this.nameSubject = data.info.name;
-                } else {
-                    console.log("ERROR IN GETTING RECORDS!!!! " + data);
+            this.store.dispatch(new SubjectAction.GetSubject(this.id));
+            this.store.select("subjects").subscribe(data => {
+                //this.id == data.info.id
+                if (data && data.subject) {
+                    //let subject = data.subjects.find(x => x.id == this.id);
+                    this.teacher = { name: data.subject.teacher, isChanged: false };
+                    this.nameSubject = data.subject.name;
                 }
+                this.loading = false;
+            })
+            this.store.select("records").subscribe(data => {
+                if (data.records) {
+                    this.dates = []; //init
+                    this.records = this.mapData(data.records, this);
+                }
+                this.loading = false;
+                if(data["message"]) alert("Records were saved successfully");
             });
         }
     }
@@ -83,13 +91,12 @@ export class JournalRecordsComponent implements OnInit {
     public saveTable(content: any): void {
         this.loading = true;
         let isValid = true;
-        let data: {records: JournalRecord[], teacher: string} = { records: [], teacher: "" }; // for sending
-        if (this.teacher.isChanged) data.teacher = this.teacher.name;
+        let records: JournalRecord[] = [];
         if (this.checkDatesAreValid()) {
             this.records.some((element: JournalRecord) => {
                 if (element.isChanged) {
                     if (this.checkMarksAreValid(element)) {
-                        data.records.push(element);
+                        records.push(element);
                         element.isChanged = false;
                     }
                     else {
@@ -99,14 +106,13 @@ export class JournalRecordsComponent implements OnInit {
                     }
                 }
             });
-            if (data.records || data.teacher) {
-                this.store.dispatch(new RecordAction.SaveRecords(this.id, data));
-                
-                setTimeout(() => {
-                   this.loading = false;
-                }, 1000);
+            if (records.length > 0) {
+                this.store.dispatch(new RecordAction.SaveRecords(this.id, records));
             }
-            else {
+            if (this.teacher.isChanged) {
+                this.store.dispatch(new SubjectAction.UpdateSubject(this.id, this.teacher.name));
+            }
+            if(records.length == 0 && this.teacher.isChanged){
                 this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
             }
         } else {
@@ -116,7 +122,7 @@ export class JournalRecordsComponent implements OnInit {
         }
     }
 
-    public updateTeacher(teacher: object) {
+    public updateTeacher() {
         this.teacher.isChanged = true;
     }
 

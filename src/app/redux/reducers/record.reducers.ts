@@ -8,7 +8,7 @@ const recordReducer = (
 ) => {
   switch (action.type) {
     case ERecordsActions.GetRecordsSuccess: {
-      return { ...state, records: action.payload.records, info: action.payload.info };
+      return { ...state, records: action.payload };
     }
     case ERecordsActions.GetRecords: {
       return { ...state };

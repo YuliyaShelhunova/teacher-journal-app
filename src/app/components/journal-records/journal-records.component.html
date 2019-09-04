@@ -52,6 +52,6 @@
 <button><img src="../../assets/images/addColumn.png" width="30px" (click)="addColumn()"></button>
 <div>
     <h4 class="teacher-input">{{'teacher' | translate}}</h4>
-    <input type="string" name="teacherName" [(ngModel)]="teacher.name" (change)="updateTeacher(teacher)" #teacherName="ngModel" required />
-    <button class="btn btn-default button-save" (click)="saveTable(teacher, content)">{{'save' | translate }}</button>
+    <input type="string" name="teacherName" [(ngModel)]="teacher.name" (change)="updateTeacher()" #teacherName="ngModel" required />
+    <button class="btn btn-default button-save" (click)="saveTable(content)">{{'save' | translate }}</button>
 </div>

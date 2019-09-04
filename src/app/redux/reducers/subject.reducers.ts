@@ -1,4 +1,5 @@
 import { SubjectAction, ESubjectActions } from "../actions/subject.actions";
+
 const initialSubjectState = {};
 const subjectReducer = (
     state = initialSubjectState,
@@ -22,6 +23,19 @@ const subjectReducer = (
         }
         case ESubjectActions.GetStatisticsSubjectSuccess: {
             return { ...state, statistics: action.payload.statistics, info: action.payload.info };
+        }
+        case ESubjectActions.UpdateSubject: {
+            return { ...state };
+        }
+        case ESubjectActions.UpdateSubjectSuccess: {
+            state["subject"].teacher = action.payload
+            return { ...state };
+        }
+        case ESubjectActions.GetSubject: {
+            return { ...state };
+        }
+        case ESubjectActions.GetSubjectSuccess: {
+            return { ...state, subject: action.payload };
         }
 
         default:

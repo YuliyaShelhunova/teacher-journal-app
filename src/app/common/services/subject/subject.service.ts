@@ -34,6 +34,18 @@ export class SubjectService {
       }));
   }
 
+  public updateSubjectById(typeId: number, teacherName: string): Observable<Subject> {
+    let data = { teacherName: teacherName }
+    return this.http.post<Subject>(API_URL + "/subjects/" + typeId, data);
+  }
+
+  public getSubjectById(typeId: number): Observable<Subject> {
+    return this.http.get(API_URL + "/subjects/" + typeId).pipe(
+      map((data: Subject) => {
+        return data;
+      }))
+  }
+
   public updateJournal(typeId: number, data: object): Observable<object> {
     return this.http.post(API_URL + "/subjects/" + typeId + "/updateRecords", data);
   }
