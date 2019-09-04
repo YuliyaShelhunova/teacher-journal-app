@@ -1,3 +1,16 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Error!</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Data isn't valid! Please check all records and enter correct data.
+    </div>
+
+</ng-template>
+
 <h2 class="name-subject"> </h2>
 
 <div id="loading" *ngIf="loading">
@@ -11,8 +24,13 @@
                 <th scope="col">{{'firstName' | translate}}</th>
                 <th scope="col">{{'lastName' | translate}}</th>
                 <th scope="col">{{'averageMark' | translate}}</th>
-                <th *ngFor="let date of dates; let i = index"><input type="string" [(ngModel)]="date"
-                        (ngModelChange)="updateDate(date, i)" style="width: 60px;"></th>
+                <th *ngFor="let d of dates; let i = index"><input type="string" [(ngModel)]="d.date"
+                        (ngModelChange)="updateDate(d.date, i)" style="width: 60px;"
+                        [ngClass]="{'is-invalid': !d.isValid}">
+                    <div [hidden]="d.isValid" class="alert alert-danger">
+                        {{'dateIsInvalid' | translate}}
+                    </div>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -20,9 +38,12 @@
                 <td>{{record.firstName}}</td>
                 <td>{{record.lastName}}</td>
                 <td>{{record.averageMark}}</td>
-                <td *ngFor="let rec of record.markOnDate | keyvalue">
-                    <input type="number" min="0" max="10" (change)="updateAverage(record, rec)" [(ngModel)]="rec.value"
-                        class="input-value">
+                <td *ngFor="let rec of record.markOnDate; let i = index">
+                    <input type="number" min="0" max="10" (change)="updateAverage(record, rec, i)"
+                        [(ngModel)]="rec.mark" class="input-value" [ngClass]="{'is-invalid': !rec.isMarkValid}">
+                    <div [hidden]="rec.isMarkValid" class="alert alert-danger size">
+                        {{'markIsInvalid' | translate}}
+                    </div>
                 </td>
             </tr>
         </tbody>
@@ -31,7 +52,6 @@
 <button><img src="../../assets/images/addColumn.png" width="30px" (click)="addColumn()"></button>
 <div>
     <h4 class="teacher-input">{{'teacher' | translate}}</h4>
-    <input type="string" name="teacherName" [(ngModel)]="teacher" #teacherName="ngModel" required />
-    <button [disabled]="teacherName.invalid || records.invalid" class="btn btn-default button-save"
-        (click)="saveTable(teacher)">{{'save' | translate }}</button>
+    <input type="string" name="teacherName" [(ngModel)]="teacher.name" (change)="updateTeacher(teacher)" #teacherName="ngModel" required />
+    <button class="btn btn-default button-save" (click)="saveTable(teacher, content)">{{'save' | translate }}</button>
 </div>

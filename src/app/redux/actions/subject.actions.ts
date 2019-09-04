@@ -21,7 +21,7 @@ export class GetSubjectsSuccess implements Action {
 
 export class AddSubject implements Action {
     public readonly type = ESubjectActions.AddSubject;
-    constructor(public payload: any) { }
+    constructor(public payload: object) { }
 }
 
 export class AddSubjectSuccess implements Action {

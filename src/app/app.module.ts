@@ -6,6 +6,7 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentTableComponent } from "./components/students/student-table/student-table.component";
 import { StudentFormComponent } from "./components/students/student-form/student-form.component";
 import { ExportComponent } from "./components/export/export.component";
@@ -22,14 +23,15 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ReduxModule } from "./redux/module";
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [AppComponent, StudentTableComponent,
     ExportComponent, StudentFormComponent, SubjectListComponent, SubjectAddFormComponent,
     JournalRecordsComponent, StatisticsMainComponent, StudentStatisticsComponent,
     SubjectStatisticsComponent, StudentRatingComponent, SubjectRatingComponent, PageNotFoundComponent],
-  imports: [BrowserModule, FormsModule, AppRoutingModule,
-    HttpClientModule, NgbModule, ReduxModule, MatProgressSpinnerModule, TranslateModule.forRoot({
+  imports: [BrowserModule, BrowserAnimationsModule, FormsModule, AppRoutingModule,
+    HttpClientModule, NgbModule, ReduxModule, MatProgressSpinnerModule, MatSortModule, TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,

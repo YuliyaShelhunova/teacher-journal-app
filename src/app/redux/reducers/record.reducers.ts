@@ -10,6 +10,12 @@ const recordReducer = (
     case ERecordsActions.GetRecordsSuccess: {
       return { ...state, records: action.payload.records, info: action.payload.info };
     }
+    case ERecordsActions.GetRecords: {
+      return { ...state };
+    }
+    case ERecordsActions.SaveRecords: {
+      return { ...state };
+    }
     case ERecordsActions.UpdateRecordsSuccess: {
       return { ...state, record: action.payload };
     }

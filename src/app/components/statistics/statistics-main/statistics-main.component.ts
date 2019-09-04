@@ -9,7 +9,6 @@ export class StatisticsMainComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

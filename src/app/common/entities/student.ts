@@ -1,8 +1,8 @@
 export class Student {
-    private id: number;
-    private firstName: string;
-    private lastName: string;
-    private address: string;
+    public id: number;
+    public firstName: string;
+    public lastName: string;
+    public address: string;
     private description: string;
 
     constructor(studentId: number, studentName: string, studentLastName: string, studentAddress: string, description: string) {

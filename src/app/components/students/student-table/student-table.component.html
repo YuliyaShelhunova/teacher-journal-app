@@ -1,12 +1,12 @@
 <h2 class="title-style">{{'students' | translate}}</h2>
 <div>
-    <table class="table table-bordered table-dark">
+    <table matSort class="table table-bordered table-dark" (matSortChange)="sortData($event)">
         <thead class="thead-background">
             <tr>
-                <th scope="col">{{'id' | translate}}</th>
-                <th scope="col">{{'firstName' | translate}}</th>
-                <th scope="col">{{'lastName' | translate}}</th>
-                <th scope="col">{{'address' | translate}}</th>
+                <th mat-sort-header="id" scope="col">{{'id' | translate}}</th>
+                <th mat-sort-header="firstName" scope="col">{{'firstName' | translate}}</th>
+                <th mat-sort-header="lastName" scope="col">{{'lastName' | translate}}</th>
+                <th mat-sort-header="address" scope="col">{{'address' | translate}}</th>
             </tr>
         </thead>
         <tbody>

@@ -20,14 +20,14 @@ export class StudentService {
         }));
   }
 
-  public addStudent(data: any): Observable<Student> {
+  public addStudent(data: object): Observable<Student> {
     console.log("student service -> addStudent");
     return this.http.post<Student>(API_URL + "/students", data);
   }
 
-  public getStatisticsStudent(typeId: number): Observable<any> {
+  public getStatisticsStudent(typeId: number): Observable<object> {
     return this.http.get(API_URL + "/students/" + typeId + "/statistics").pipe(
-      map((data: any) => {
+      map((data: object) => {
         return data;
       }));
   }

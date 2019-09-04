@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { ExportService } from "./../../common/services/export/export.service";
-import * as fileSaver from 'file-saver';
+import * as fileSaver from "file-saver";
+import { ExportService } from "../../common/services/export/export.service";
 
 enum EExportTypes {
     pdfType = "pdf",
@@ -22,8 +22,8 @@ export class ExportComponent {
         var fileName = "";
         switch (typeFile) {
             case EExportTypes.excelType: {
-               fileName = "teacher_journal.xlsx";
-               break;
+                fileName = "teacher_journal.xlsx";
+                break;
             }
             case EExportTypes.pdfType: {
                 fileName = "teacher_journal.pdf";

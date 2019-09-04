@@ -49,7 +49,7 @@ function init() {
                     var dataSend = [];
                     for (var i = 0; i < data.length; i++) {
                         for (var j = 0; j < studentsId.length; j++) {
-                            dataSend.push({ subjectId: data[i].id, studentId: studentsId[j].id, averageMark: null, markOnDate: "" });
+                            dataSend.push({ subjectId: data[i].id, studentId: studentsId[j].id, averageMark: 0, markOnDate: "" });
                         }
                     }
                     return dataSend;
@@ -66,14 +66,14 @@ function init() {
 
 function initRecords() {
     var date = new Date();
-    date = date.getDate() + "/" + date.getMonth();
+    date = date.getMonth() + "/" + date.getDate();
     recordsRepo.createTable()
         .then(() => {
             studentsRepo.getAllId().then((dataD) => {
                 var studentsId = dataD;
                 subjectsRepo.getAllId().then((data) => {
                     var records = [];
-                    var markOnDate = [[date, null]];
+                    var markOnDate = [{ date: date, mark: null }];
                     for (var i = 0; i < data.length; i++) {
                         for (var j = 0; j < studentsId.length; j++) {
                             records.push({ subjectId: data[i].id, studentId: studentsId[j].id, averageMark: 0, markOnDate: JSON.stringify(markOnDate) });
@@ -90,15 +90,15 @@ function initRecords() {
 }
 
 //initRecords();
-function createRecord(repository, id, isSubjectsRepo) {
+function createRecord(repository, id, isStudent) {
     var date = new Date();
-    date = date.getDate() + "/" + date.getMonth();
+    date = date.getMonth() + "/" + date.getDate();
     repository.getAllId().then((data) => {
         var dataSend = [];
-        var markOnDate = [[date, null]];
+        var markOnDate = [{ date: date, mark: null }];
         markOnDate = JSON.stringify(markOnDate);
         for (var i = 0; i < data.length; i++) {
-            if (isSubjectsRepo) dataSend.push({ subjectId: data[i].id, studentId: id, averageMark: 0, markOnDate: markOnDate });
+            if (isStudent) dataSend.push({ subjectId: data[i].id, studentId: id, averageMark: 0, markOnDate: markOnDate });
             dataSend.push({ subjectId: id, studentId: data[i].id, averageMark: 0, markOnDate: markOnDate });
         }
         Promise.all(dataSend.map((record) => {
@@ -116,8 +116,8 @@ function getStatistics(repository, id) {
                     console.log("DATA:" + JSON.stringify(data));
                     var count = 0, sum = 0, average = 0;
                     for (var i = 0; i < data.length; i++) {
-                        if (data[i].averageMark !== 0 || data[i].averageMark !== null) {
-                            console.log("DATA[i]: " + data[i].averageMark)
+                        if (data[i].averageMark !== 0) {
+                            console.log("DATA: " + i + data[i].averageMark + "---" + typeof data[i].averageMark)
                             sum += (data[i].averageMark)
                             count++;
                         }
@@ -208,20 +208,44 @@ app.get('/api/subjects/:id/records', function (req, res) {
 });
 
 app.post('/api/subjects/:id/updateRecords', function (req, res) {
-    console.log("UPDATE" + req.body);
-    var records = req.body;
-    Promise.all(records.map((record) => {
-        record.markOnDate = Array.from(record.markOnDate);
-        const { averageMark, markOnDate, studentId, subjectId } = record
-        console.log("DATA" + averageMark + " " + JSON.stringify(markOnDate) + " " + studentId + " " + subjectId);
-        return recordsRepo.update(averageMark, JSON.stringify(markOnDate), studentId, subjectId).then((data) => {
+    console.log("UPDATE" + JSON.stringify(req.body));
+    var records = req.body.records;
+    var teacher = req.body.teacher;
+    var subjectId = req.params.id;
+
+    var promises = [];
+
+    if (teacher) {
+        promises.push(subjectsRepo.getById(subjectId).then((data) => {
+            // console.log("TEACHER: " + data.teacher + "---" + teacher);
+            data.teacher = teacher;
+            return subjectsRepo.update(data).then((data) => {
+                //console.log("Teacher: !!!" + JSON.data);
+                return data;
+            })
+        }));
+    }
+
+    if (records) {
+        records.map((record) => {
+            const { averageMark, markOnDate, studentId, subjectId } = record
+            //console.log("DATA" + averageMark + " " + JSON.stringify(markOnDate) + " " + studentId + " " + subjectId);
+            promises.push(recordsRepo.update(averageMark, JSON.stringify(markOnDate), studentId, subjectId).then((data) => {
+                console.log("DATA: !!!" + data);
+                return data
+            }).catch((err) => {
+                console.log('Server was not sent data', err)
+                return err
+            }));
+        })
+    }
+
+    Promise.all(promises).then((data) => {
+        if (data) {
             console.log(data);
-            return data
-        }).catch((err) => {
-            console.log('Server was not sent data', err)
-            return err
-        });
-    })).then(data => console.log(data));
+            res.send(data);
+        }
+    }).catch((err) => res.send(err));
 });
 
 app.get('/api/subjects/:id/statistics', function (req, res) {

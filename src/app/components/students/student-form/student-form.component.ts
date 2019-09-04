@@ -8,13 +8,8 @@ import * as StudentAction from "../../../redux/actions/students.actions";
   templateUrl: './student-form.component.html',
   styleUrls: ['./student-form.component.less']
 })
-// @Component({
-//     selector: "ngbd-modal-content",
-//     templateUrl: "student-modal.component.html",
-//     styleUrls: ["./student-modal.component.less"]
-// })
-export class StudentFormComponent implements OnInit {
 
+export class StudentFormComponent implements OnInit {
   constructor(private activeModal: NgbActiveModal, private store: Store<any>) { }
 
   public ngOnInit(): void { }

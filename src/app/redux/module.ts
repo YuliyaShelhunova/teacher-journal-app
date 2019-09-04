@@ -8,11 +8,11 @@ import { RecordsEffects } from './effects/records.effects';
 import { StudentEffects } from './effects/students.effects';
 import { SubjectsEffects } from './effects/subjects.effects';
 
-import { SubjectService } from './../common/services/subject/subject.service'
-import { StudentService } from './../common/services/student/student.service'
+import { SubjectService } from './../common/services/subject/subject.service';
+import { StudentService } from './../common/services/student/student.service';
 
 @NgModule({
-  imports: [StoreModule.forRoot(appReducers), EffectsModule.forRoot([RecordsEffects, 
+  imports: [StoreModule.forRoot(appReducers), EffectsModule.forRoot([RecordsEffects,
     StudentEffects, SubjectsEffects])],
   providers: [SubjectService, StudentService],
 

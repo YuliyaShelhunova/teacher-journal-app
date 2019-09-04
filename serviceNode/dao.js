@@ -16,26 +16,6 @@ class AppDAO {
         this.db.run
     }
 
-    // runWithTransaction(sql, params = []) {
-    //     return new Promise((resolve, reject) => {
-    //         db.beginTransaction(function (err, transaction) {
-    //             console.log(params);
-    //             params.forEach(element => {
-    //                 const { id, averageMark, markOnDate, studentId, subjectId } = element;
-    //                 transaction.run(sql,[id, averageMark, markOnDate, studentId, subjectId]);
-    //                 database.run(sql,[id, averageMark, markOnDate, studentId, subjectId]);
-    //             });
-    //             someAsync(function () {
-    //                 transaction.commit(function (err) {
-    //                     if (err) return reject(err);
-    //                     resolve("Save")
-    //                 });
-    
-    //             });
-    //         });
-    //     });
-    // }
-
     run(sql, params = []) {
         return new Promise((resolve, reject) => {
             this.db.run(sql, params, function (err) {
@@ -44,7 +24,6 @@ class AppDAO {
                     console.log(err)
                     reject(err)
                 } else {
-                    console.log(this)
                     resolve({ id: this.lastID })
                 }
             })

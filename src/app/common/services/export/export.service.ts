@@ -9,7 +9,7 @@ import { API_URL } from "../../constants/urls";
 export class ExportService {
   constructor(private http: HttpClient) { }
 
-  public getFile(type: string, fileName: string): Observable<any> {
+  public getFile(type: string, fileName: string): Observable<Blob> {
     var body = { filename: fileName };
     return this.http.post(API_URL + "/export/" + type, body, { responseType: "blob" });
   }

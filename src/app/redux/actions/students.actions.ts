@@ -20,7 +20,7 @@ export class GetStudentsSuccess implements Action {
 
 export class AddStudent implements Action {
     public readonly type = EStudentActions.AddStudent;
-    constructor(public payload: any) { }
+    constructor(public payload: object) { }
 }
 
 export class AddStudentSuccess implements Action {

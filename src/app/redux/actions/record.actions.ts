@@ -12,7 +12,7 @@ export enum ERecordsActions {
 }
 export class GetRecords implements Action {
     public readonly type = ERecordsActions.GetRecords;
-    constructor(public payload: any) { }
+    constructor(public payload: number) { }
 }
 
 export class GetRecordsSuccess implements Action {
@@ -31,12 +31,12 @@ export class UpdateRecordsSuccess implements Action {
 
 export class SaveRecords implements Action {
     public readonly type = ERecordsActions.SaveRecords;
-    constructor(public typeId: number, public payload: JournalRecord[]) { }
+    constructor(public typeId: number, public payload: object) { }
 }
 
 export class SaveRecordsSuccess implements Action {
     public readonly type = ERecordsActions.SaveRecordsSuccess;
-    constructor(public payload: JournalRecord[]) { }
+    constructor(public payload: string) { }
 }
 
 export type RecordsAction = GetRecords | GetRecordsSuccess | UpdateRecordsSuccess | SaveRecords | SaveRecordsSuccess;

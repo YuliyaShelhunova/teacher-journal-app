@@ -10,17 +10,16 @@ import { Router, Event, NavigationStart, NavigationEnd } from "@angular/router";
     styleUrls: ["./student-rating.component.less"]
 })
 export class StudentRatingComponent {
-    public statistics: any = [];
+    public statistics: number[] = [];
     public nameStudent: string;
     public id: number;
-    // tslint:disable-next-line:no-parameter-properties
+
     constructor(private store: Store<any>, private activateRoute: ActivatedRoute, private router: Router) {
-        //this.id = Number(activateRoute.snapshot.params.id);
         this.router.events.subscribe((event: Event) => {
-            if (event instanceof NavigationStart || event instanceof NavigationEnd) {
-                let id = event.url.split("/").slice(-1).pop();
+            if (event instanceof NavigationEnd) {
+                let id = Number(event.url.split("/").slice(-1).pop());
                 this.id = Number(activateRoute.snapshot.params.id);
-                if(this.id) this.store.dispatch(new StudentAction.GetStatisticsStudent(id));
+                if (this.id && id == this.id) this.store.dispatch(new StudentAction.GetStatisticsStudent(id));
             }
         });
     }
@@ -28,13 +27,18 @@ export class StudentRatingComponent {
     public ngOnInit(): void {
         this.store.select("students").subscribe
             (data => {
-                if (data.statistics) {
-                    this.statistics = [];
-                    for (let i = 1; i < (data.statistics / 2); i++) {
-                        this.statistics.push(i);
-                    }
+                if (data.info && (data.info.id = this.id)) {
+                    this.statistics = this.calculateRating(data.statistics)
                     this.nameStudent = data.info.firstName + " " + data.info.lastName;
                 }
             });
+    }
+
+    public calculateRating(statistics: number) {
+        let rating = [];
+        for (let i = 1; i < statistics / 2; i++) {
+            rating.push(i);
+        }
+        return rating;
     }
 }

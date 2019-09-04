@@ -22,28 +22,25 @@ export class SubjectService {
       }));
   }
 
-  public addSubject(data: any): Observable<Subject> {
+  public addSubject(data: object): Observable<Subject> {
     console.log("subject service -> add subject");
     return this.http.post<Subject>(API_URL + "/subjects", data);
   }
 
-  public getRecordsById(typeId: number): Observable<any> {
+  public getRecordsById(typeId: number): Observable<JournalRecord[]> {
     return this.http.get(API_URL + "/subjects/" + typeId + "/records").pipe(
-      map((data: any) => {
+      map((data: JournalRecord[]) => {
         return data;
       }));
   }
 
-  public updateJournal(typeId: number, records: JournalRecord[]): Observable<any> {
-    return this.http.post<JournalRecord[]>(API_URL + "/subjects/" + typeId + "/updateRecords", records).pipe(
-      map((data: any) => {
-        return data;
-      }));
+  public updateJournal(typeId: number, data: object): Observable<object> {
+    return this.http.post(API_URL + "/subjects/" + typeId + "/updateRecords", data);
   }
 
-  public getStatisticsSubject(typeId: number): Observable<any> {
+  public getStatisticsSubject(typeId: number): Observable<object> {
     return this.http.get(API_URL + "/subjects/" + typeId + "/statistics").pipe(
-      map((data: any) => {
+      map((data: object) => {
         return data;
       }));
   }

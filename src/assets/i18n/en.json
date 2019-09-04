@@ -21,6 +21,7 @@
     "save": "Save",
     "rating": "Rating",
     "error": "ERROR!",
-    "pageNotFound": "Page wasn't found!"
-
+    "pageNotFound": "Page wasn't found!",
+    "dateIsInvalid": "Date is invalid. Please, enter date in format mm/yy",
+    "markIsInvalid": "Mark is invalid"
 }

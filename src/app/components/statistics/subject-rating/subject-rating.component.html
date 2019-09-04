@@ -3,5 +3,12 @@
     <div *ngIf="statistics">
         <span *ngFor="let i of statistics" class="fa fa-star checked" style="font-size: 48px;"></span>
     </div>
+    <div *ngIf="statistics == 0">
+        <span class="fa fa-star" style="font-size: 48px;"></span>
+        <span class="fa fa-star" style="font-size: 48px;"></span>
+        <span class="fa fa-star" style="font-size: 48px;"></span>
+        <span class="fa fa-star" style="font-size: 48px;"></span>
+        <span class="fa fa-star" style="font-size: 48px;"></span>
+    </div>
     <h4>{{'rating' | translate}}</h4>
 </div>
