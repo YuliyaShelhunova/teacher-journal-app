@@ -33,7 +33,7 @@
     "cors": "^2.8.5",
     "exceljs": "^1.15.0",
     "fastify": "^2.6.0",
-    "html-pdf": "^2.2.0",
+    "html-pdf": "^3.0.1",
     "jquery": "3.4.1",
     "jsdom": "^15.1.1",
     "ngx-toastr": "^9.1.1",
